@@ -29,6 +29,17 @@ jobs:
         python -m pip install --upgrade pip
         pip install psycopg2
 
+    - name: Print environment variables
+      run: |
+        echo "DB_NAME: $DB_NAME"
+        echo "DB_USER: $DB_USER"
+        echo "DB_PASSWORD: $DB_PASSWORD"
+        echo "DB_HOST: $DB_HOST"
+        echo "DB_PORT: $DB_PORT"
+
+    - name: Ping database host
+      run: ping -c 4 $DB_HOST
+
     - name: Run Python script
       env:
         DB_NAME: ${{ secrets.DB_NAME }}
