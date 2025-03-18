@@ -3,7 +3,8 @@ name: Print Hello World
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every hour
-
+  workflow_dispatch:  # Allows manual triggering  
+  
 jobs:
   print-hello-world:
     runs-on: ubuntu-latest
