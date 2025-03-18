@@ -44,6 +44,8 @@ jobs:
         echo "DB_PORT: $DB_PORT"
     
     - name: Ping database host
+      env:
+        DB_HOST: ${{ secrets.DB_HOST }}
       run: ping -c 4 $DB_HOST   
 
     - name: Run Python script
