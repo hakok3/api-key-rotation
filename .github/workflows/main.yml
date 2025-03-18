@@ -42,6 +42,9 @@ jobs:
         echo "DB_PASSWORD: $DB_PASSWORD"
         echo "DB_HOST: $DB_HOST"
         echo "DB_PORT: $DB_PORT"
+    
+    - name: Ping database host
+      run: ping -c 4 $DB_HOST   
 
     - name: Run Python script
       env:
