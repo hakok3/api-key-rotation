@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 0 * * *'  # Runs every hour
   workflow_dispatch:  # Allows manual triggering  
-  
+
 jobs:
   print-hello-world:
     runs-on: ubuntu-latest
@@ -17,8 +17,9 @@ jobs:
       run: ls -la
 
     - name: Print working directory
-      run: pwd  
-
+      run: pwd 
+    - name: Print working directory2
+      run: pwd    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
