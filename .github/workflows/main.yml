@@ -31,11 +31,11 @@ jobs:
 
     - name: Print environment variables
       env:
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_NAME: ${{ secrets.DB_NAME || 'default_value' }}
+        DB_USER: ${{ secrets.DB_USER || 'default_value'}}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD || 'default_value'}}
+        DB_HOST: ${{ secrets.DB_HOST || 'default_value'}}
+        DB_PORT: ${{ secrets.DB_PORT || 'default_value'}}
       run: |
         echo "DB_NAME: $DB_NAME"
         echo "DB_USER: $DB_USER"
