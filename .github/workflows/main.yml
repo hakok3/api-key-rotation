@@ -32,19 +32,16 @@ jobs:
     - name: Print secret value
       run: echo "The secret value is ${{ secrets.TEST }}"
 
-    - name: Print environment variables
-      env:
-        DB_NAME: ${{ secrets.DB_NAME || 'default_value' }}
-        DB_USER: ${{ secrets.DB_USER || 'default_value'}}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD || 'default_value'}}
-        DB_HOST: ${{ secrets.DB_HOST || 'default_value'}}
-        DB_PORT: ${{ secrets.DB_PORT || 'default_value'}}
+    - name: Set up environment variables
       run: |
-        echo "DB_NAME: $DB_NAME"
-        echo "DB_USER: $DB_USER"
-        echo "DB_PASSWORD: $DB_PASSWORD"
-        echo "DB_HOST: $DB_HOST"
-        echo "DB_PORT: $DB_PORT"
+        echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+        echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+        echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+
+    - name: Print database name
+      run: echo "The database name is ${{ secrets.DB_NAME }}"
     
     - name: Run Python script
       env:
