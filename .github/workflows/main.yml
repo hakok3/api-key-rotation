@@ -30,7 +30,7 @@ jobs:
         pip install psycopg2
     
     - name: Print secret value
-      run: echo "The secret value is ${{ secrets.DB_NAME }}"
+      run: echo "The secret value is ${{ secrets.TEST }}"
 
     - name: Print environment variables
       env:
