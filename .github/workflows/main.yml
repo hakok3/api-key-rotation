@@ -37,7 +37,7 @@ jobs:
         echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
 
     - name: Print DB_HOST name
-      run: echo "The DB_HOST name is ${{ secrets.DB_HOST || "default" }}"
+      run: echo "The DB_HOST name is ${{ secrets.DB_HOST || 'default_value' }}"
     
     - name: Run Python script
       env:
