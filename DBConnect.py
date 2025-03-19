@@ -13,7 +13,7 @@ db_params = {
 }
 
 def create_table():
-    # Connect to the PostgreSQL database
+    print(f"The database name is: {db_params['dbname']}")    # Connect to the PostgreSQL database
     conn = psycopg2.connect(**db_params)
     cur = conn.cursor()
     
