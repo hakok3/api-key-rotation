@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 import psycopg2
-
 import os
 
 # Database connection parameters
@@ -13,7 +12,7 @@ db_params = {
 }
 
 def create_table():
-    # print(f"The database name is: {db_params['dbname']}")    # Connect to the PostgreSQL database
+    # Connect to the PostgreSQL database
     conn = psycopg2.connect(**db_params)
     cur = conn.cursor()
     
@@ -25,7 +24,9 @@ def create_table():
         app_key VARCHAR(255) NOT NULL,
         app_id VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        status VARCHAR(50) NOT NULL
+        status VARCHAR(50) NOT NULL,
+        expiryDate TIMESTAMP,
+        updateDate TIMESTAMP
     )
     """)
     
@@ -105,13 +106,16 @@ def deactivate_app_details(app_key, app_id):
         conn = psycopg2.connect(**db_params)
         cur = conn.cursor()
         
+        current_date = datetime.now()
+        expiry_date = current_date + timedelta(days=180)
         # Update the status to 'deactive' based on app_key and app_id
         update_query = """
         UPDATE app_details
-        SET status = 'deactive'
+        SET status = 'deactive',
+        updateDate = %s, expiryDate = %s
         WHERE app_key = %s AND app_id = %s
         """
-        cur.execute(update_query, (app_key, app_id))
+        cur.execute(update_query, (current_date,expiry_date,app_key, app_id))
         
         # Commit the transaction
         conn.commit()
